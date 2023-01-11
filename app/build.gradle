@@ -1,5 +1,8 @@
 plugins {
-    id 'java'
+    id 'application'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group 'hexlet.code'
@@ -9,15 +12,95 @@ repositories {
     mavenCentral()
 }
 
-compileJava {
-    options.release = 17
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    testImplementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.2.3'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'info.picocli:picocli:4.7.0'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.1'
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+application {
+    mainClass = 'hexlet.code.App'
+}
+
+compileJava {
+    options.release = 17
+    options.compilerArgs += ["-Aproject=${project.group}/${project.name}"]
+}
+
+checkstyle {
+    toolVersion '9.2.1'
 }
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+//    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        csv.required = true
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+}
+
+testlogger {
+    // pick a theme - mocha, standard, plain, mocha-parallel, standard-parallel or plain-parallel
+    theme 'standard'
+
+    // set to false to disable detailed failure logs
+    showExceptions true
+
+    // set to false to hide stack traces
+    showStackTraces true
+
+    // set to true to remove any filtering applied to stack traces
+    showFullStackTraces false
+
+    // set to false to hide exception causes
+    showCauses true
+
+    // set threshold in milliseconds to highlight slow tests
+    slowThreshold 0
+
+    // displays a breakdown of passes, failures and skips along with total duration
+    showSummary true
+
+    // set to true to see simple class names
+    showSimpleNames false
+
+    // set to false to hide passed tests
+    showPassed true
+
+    // set to false to hide skipped tests
+    showSkipped true
+
+    // set to false to hide failed tests
+    showFailed true
+
+    // enable to see standard out and error streams inline with the test results
+    showStandardStreams true
+
+    // set to false to hide passed standard out and error streams
+    showPassedStandardStreams true
+
+    // set to false to hide skipped standard out and error streams
+    showSkippedStandardStreams true
+
+    // set to false to hide failed standard out and error streams
+    showFailedStandardStreams true
 }
