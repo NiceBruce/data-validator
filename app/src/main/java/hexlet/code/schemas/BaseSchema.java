@@ -26,7 +26,7 @@ public class BaseSchema {
     public final boolean getIsRequiredEnabled() {
         return isRequiredEnabled;
     }
-    
+
     public BaseSchema required() {
         setIsRequiredEnabled(true);
         return this;

@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/NiceBruce/java-project-78/workflows/hexlet-check/badge.svg)](https://github.com/NiceBruce/java-project-78/actions)
-[![Maintainability](https://api.codeclimate.com/v1/badges/25e8fbdcd434d17f2621/maintainability)](https://codeclimate.com/github/NiceBruce/java-project-78/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/25e8fbdcd434d17f2621/test_coverage)](https://codeclimate.com/github/NiceBruce/java-project-78/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e24dfc6a9af99d81e682/maintainability)](https://codeclimate.com/github/NiceBruce/java-project-78/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e24dfc6a9af99d81e682/test_coverage)](https://codeclimate.com/github/NiceBruce/java-project-78/test_coverage)
 
 # A data validator is a library with which you can check the correctness of any data.
 
