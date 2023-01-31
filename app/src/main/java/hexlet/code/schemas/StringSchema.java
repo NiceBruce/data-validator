@@ -3,6 +3,7 @@ package hexlet.code.schemas;
 import java.util.List;
 import java.util.function.Predicate;
 
+
 public class StringSchema extends BaseSchema {
 
     public final StringSchema minLength(int length) {

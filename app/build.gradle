@@ -34,8 +34,6 @@ compileJava {
 
 checkstyle {
     toolVersion '9.2.1'
-    maxWarnings = 0
-    ignoreFailures false
 }
 
 test {

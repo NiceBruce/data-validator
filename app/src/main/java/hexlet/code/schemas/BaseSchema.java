@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.function.Predicate;
 
+
 public class BaseSchema {
     private List<Predicate> summaryOfCheck = new LinkedList<>();
     private boolean isRequiredEnabled = false;
@@ -25,12 +26,11 @@ public class BaseSchema {
     public final boolean getIsRequiredEnabled() {
         return isRequiredEnabled;
     }
-
-    public  BaseSchema required() {
+    
+    public BaseSchema required() {
         setIsRequiredEnabled(true);
         return this;
     }
-
     public final boolean isValid(Object obj) {
         return summaryOfCheck.stream()
                  .allMatch(i -> i.test(obj));
