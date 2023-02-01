@@ -20,9 +20,10 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public final BaseSchema required() {
+        setIsRequiredEnabled(true);
         Predicate<Object> isNumber = i -> i instanceof Integer;
         addToSummaryOfCheck(0, isNumber);
-        return super.required();
+        return this;
     }
 
 }

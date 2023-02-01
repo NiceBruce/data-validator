@@ -16,8 +16,9 @@ public class MapSchema extends BaseSchema {
     }
     @Override
     public final BaseSchema required() {
+        setIsRequiredEnabled(true);
         Predicate<Object> isMap = m -> m instanceof Map<?, ?>;
         addToSummaryOfCheck(isMap);
-        return super.required();
+        return this;
     }
 }

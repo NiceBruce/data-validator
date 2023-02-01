@@ -17,12 +17,14 @@ public class StringSchema extends BaseSchema {
         addToSummaryOfCheck(contains);
         return this;
     }
+
     @Override
     public final BaseSchema required() {
+        setIsRequiredEnabled(true);
         Predicate<String> isNotNull = s -> s != null;
         Predicate<Object> isString = s -> s instanceof String;
         Predicate<String> isNotEmpty = s -> s.length() > 0;
         addToSummaryOfCheck(List.of(isString, isNotNull, isNotEmpty));
-        return super.required();
+        return this;
     }
 }

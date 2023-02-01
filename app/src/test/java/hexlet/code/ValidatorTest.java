@@ -11,8 +11,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ValidatorTest {
 
-    private static final int AGE_OF_HUMAN1 = 100;
-    private static final int AGE_OF_HUMAN4 = -5;
+    private static final int MIN_LENGTH_OF_NAME = 6;
+    private static final int AGE_OF_ARAGORN = 87;
+    private static final int AGE_OF_SPIRIT = -5;
+    private static final int AGE_OF_FRODO = 50;
 
     @Test
     void validatorTest() {
@@ -20,33 +22,39 @@ public class ValidatorTest {
         MapSchema schema = v.map();
 
         Map<String, BaseSchema> schemas = new HashMap<>();
-        schemas.put("name", v.string().required());
+        schemas.put("name", v.string().minLength(MIN_LENGTH_OF_NAME).required());
         schemas.put("age", v.number().positive());
         schema.shape(schemas);
 
-        Map<String, Object> human1 = new HashMap<>();
-        human1.put("name", "Kolya");
-        human1.put("age", AGE_OF_HUMAN1);
+        Map<String, Object> character1 = new HashMap<>();
+        character1.put("name", "Aragorn");
+        character1.put("age", AGE_OF_ARAGORN);
 
-        assertThat(schema.isValid(human1)).isEqualTo(true);
+        assertThat(schema.isValid(character1)).isEqualTo(true);
 
-        Map<String, Object> human2 = new HashMap<>();
-        human2.put("name", "Maya");
-        human2.put("age", null);
+        Map<String, Object> character2 = new HashMap<>();
+        character2.put("name", "Gendalf");
+        character2.put("age", null);
 
-        assertThat(schema.isValid(human2)).isEqualTo(true);
+        assertThat(schema.isValid(character2)).isEqualTo(true);
 
-        Map<String, Object> human3 = new HashMap<>();
-        human3.put("name", "");
-        human3.put("age", null);
+        Map<String, Object> noNameChar = new HashMap<>();
+        noNameChar.put("name", "");
+        noNameChar.put("age", null);
 
-        assertThat(schema.isValid(human3)).isEqualTo(false);
+        assertThat(schema.isValid(noNameChar)).isEqualTo(false);
 
-        Map<String, Object> human4 = new HashMap<>();
-        human4.put("name", "Valya");
-        human4.put("age", AGE_OF_HUMAN4);
+        Map<String, Object> character3 = new HashMap<>();
+        character3.put("name", "Spirit");
+        character3.put("age", AGE_OF_SPIRIT);
 
-        assertThat(schema.isValid(human4)).isEqualTo(false);
+        assertThat(schema.isValid(character3)).isEqualTo(false);
+
+        Map<String, Object> character4 = new HashMap<>();
+        character4.put("name", "Frodo");
+        character4.put("age", AGE_OF_FRODO);
+
+        assertThat(schema.isValid(character4)).isEqualTo(false);
     }
 
 }
