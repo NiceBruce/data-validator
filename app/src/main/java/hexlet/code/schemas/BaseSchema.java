@@ -28,7 +28,7 @@ public abstract class BaseSchema {
         return isRequiredEnabled;
     }
 
-    abstract BaseSchema required();
+    public abstract BaseSchema required();
 
     public final boolean isValid(Object obj) {
         return summaryOfCheck.stream()

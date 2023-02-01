@@ -19,7 +19,7 @@ public class StringSchema extends BaseSchema {
     }
 
     @Override
-    public final BaseSchema required() {
+    public final StringSchema required() {
         setIsRequiredEnabled(true);
         Predicate<String> isNotNull = s -> s != null;
         Predicate<Object> isString = s -> s instanceof String;

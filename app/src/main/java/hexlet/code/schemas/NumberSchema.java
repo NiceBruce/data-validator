@@ -3,12 +3,9 @@ package hexlet.code.schemas;
 import java.util.function.Predicate;
 
 public class NumberSchema extends BaseSchema {
-    private int[] rangeArr = new int[2];
 
     public final void range(int lowRange, int highRange) {
-        this.rangeArr[0] = lowRange;
-        this.rangeArr[1] = highRange;
-        Predicate<Integer> isNumberFromRange = i -> (i >= rangeArr[0] && i <= rangeArr[1]);
+        Predicate<Integer> isNumberFromRange = i -> (i >= lowRange && i <= highRange);
         addToSummaryOfCheck(isNumberFromRange);
     }
 
@@ -19,7 +16,7 @@ public class NumberSchema extends BaseSchema {
     }
 
     @Override
-    public final BaseSchema required() {
+    public final NumberSchema required() {
         setIsRequiredEnabled(true);
         Predicate<Object> isNumber = i -> i instanceof Integer;
         addToSummaryOfCheck(0, isNumber);

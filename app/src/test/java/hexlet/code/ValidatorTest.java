@@ -23,7 +23,7 @@ public class ValidatorTest {
 
 
     @Test
-    void validatorTestMap() {
+    void validatorTestNestedValidation() {
         Validator v = new Validator();
         MapSchema schema = v.map();
 
@@ -116,5 +116,32 @@ public class ValidatorTest {
         assertThat(schema.isValid(HIGH_RANGE)).isEqualTo(true);
         assertThat(schema.isValid(LOW_RANGE - 1)).isEqualTo(false);
         assertThat(schema.isValid(HIGH_RANGE + 1)).isEqualTo(false);
+    }
+
+    @Test
+    void validatorTestMapSchema() {
+
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        assertThat(schema.isValid(null)).isEqualTo(true);
+
+        schema.required();
+
+        assertThat(schema.isValid(null)).isEqualTo(false);
+        assertThat(schema.isValid(new HashMap())).isEqualTo(true);
+
+        Map<String, String> characters = new HashMap<>();
+        characters.put("Bilbo", "Baggins");
+
+        assertThat(schema.isValid(characters)).isEqualTo(true);
+
+        schema.sizeof(2);
+
+        assertThat(schema.isValid(characters)).isEqualTo(false);
+
+        characters.put("Saruman", "the White");
+
+        assertThat(schema.isValid(characters)).isEqualTo(true);
     }
 }
