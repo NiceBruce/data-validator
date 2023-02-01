@@ -23,7 +23,7 @@ public class ValidatorTest {
 
 
     @Test
-    void validatorTestNestedValidation() {
+    void testNestedValidation() {
         Validator v = new Validator();
         MapSchema schema = v.map();
 
@@ -64,7 +64,7 @@ public class ValidatorTest {
     }
 
     @Test
-    void validatorTestStringSchema() {
+    void testStringSchema() {
 
         Validator v = new Validator();
         StringSchema schema = v.string();
@@ -94,7 +94,7 @@ public class ValidatorTest {
     }
 
     @Test
-    void validatorTestNumberSchema() {
+    void testNumberSchema() {
 
         Validator v = new Validator();
         NumberSchema schema = v.number();
@@ -119,7 +119,7 @@ public class ValidatorTest {
     }
 
     @Test
-    void validatorTestMapSchema() {
+    void testMapSchema() {
 
         Validator v = new Validator();
         MapSchema schema = v.map();

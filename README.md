@@ -13,29 +13,34 @@ Validator v = new Validator();
 // For Strings
 StringSchema schema = v.string().required();
 
-schema.isValid("what does the fox say"); // true
+schema.isValid("You have no power here, Gandalf the Grey"); // true
 schema.isValid(""); // false
 
 // For Numbers
 NumberSchema schema = v.number().required().positive();
 
-schema.isValid(-10); // false
-schema.isValid(10); // true
+schema.isValid(-1); // false
+schema.isValid(1); // true
 
 // Object Map with structure verification support
 
 Map<String, BaseSchema> schemas = new HashMap<>();
-schemas.put("name", v.string().required());
+schemas.put("name", v.string().minLength(6).required());
 schemas.put("age", v.number().positive());
 
 MapSchema schema = v.map().sizeof(2).shape(schemas);
 
-Map<String, Object> human1 = new HashMap<>();
-human1.put("name", "Kolya");
-human1.put("age", 100);
-schema.isValid(human1); // true
+Map<String, Object> character1 = new HashMap<>();
+character1.put("name", "Aragorn");
+character1.put("age", 87);
+schema.isValid(character1); // true
 
-Map<String, Object> human2 = new HashMap<>();
-human2.put("name", "");
-human2.put("age", null);
-schema.isValid(human1); // false````
+Map<String, Object> character2 = new HashMap<>();
+character2.put("name", "Frodo");
+character2.put("age", 50);
+schema.isValid(character2); // false
+
+Map<String, Object> noNameChar = new HashMap<>();
+noNameChar.put("name", "");
+noNameChar.put("age", null);
+schema.isValid(noNameChar); // false
