@@ -1,6 +1,5 @@
 package hexlet.code.schemas;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -19,12 +18,15 @@ public class StringSchema extends BaseSchema {
     }
 
     @Override
+    public final boolean isCorrectType(Object obj) {
+        return String.class.isInstance(obj);
+    }
+
+    @Override
     public final StringSchema required() {
         setIsRequiredEnabled(true);
-        Predicate<String> isNotNull = s -> s != null;
-        Predicate<Object> isString = s -> s instanceof String;
         Predicate<String> isNotEmpty = s -> s.length() > 0;
-        addToSummaryOfCheck(List.of(isString, isNotNull, isNotEmpty));
+        addToSummaryOfCheck(isNotEmpty);
         return this;
     }
 }

@@ -10,16 +10,19 @@ public class NumberSchema extends BaseSchema {
     }
 
     public final NumberSchema positive() {
-        Predicate<Integer> isPositive = i -> getIsRequiredEnabled() ? i > 0 : (i instanceof Integer) ? i > 0 : true;
+        Predicate<Integer> isPositive = i -> i > 0;
         addToSummaryOfCheck(isPositive);
         return this;
     }
 
     @Override
+    public final boolean isCorrectType(Object obj) {
+        return Integer.class.isInstance(obj);
+    }
+
+    @Override
     public final NumberSchema required() {
         setIsRequiredEnabled(true);
-        Predicate<Object> isNumber = i -> i instanceof Integer;
-        addToSummaryOfCheck(0, isNumber);
         return this;
     }
 

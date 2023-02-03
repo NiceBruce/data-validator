@@ -8,30 +8,26 @@ import java.util.function.Predicate;
 public abstract class BaseSchema {
 
     private List<Predicate> summaryOfCheck = new LinkedList<>();
-    private boolean isRequiredEnabled = false;
+    private boolean isRequired = false;
 
-    public final void addToSummaryOfCheck(List<Predicate> listOfPredicate) {
-        this.summaryOfCheck.addAll(listOfPredicate);
+    public final void setIsRequiredEnabled(boolean requiredEnabled) {
+        isRequired = requiredEnabled;
     }
+
     public final void addToSummaryOfCheck(Predicate predicate) {
         this.summaryOfCheck.add(predicate);
     }
-    public final void addToSummaryOfCheck(int index, Predicate predicate) {
-        this.summaryOfCheck.add(index, predicate);
-    }
 
-    public final void setIsRequiredEnabled(boolean requiredEnabled) {
-        isRequiredEnabled = requiredEnabled;
-    }
-
-    public final boolean getIsRequiredEnabled() {
-        return isRequiredEnabled;
-    }
+    public abstract boolean isCorrectType(Object obj);
 
     public abstract BaseSchema required();
 
     public final boolean isValid(Object obj) {
-        return summaryOfCheck.stream()
-                 .allMatch(i -> i.test(obj));
+        if (!isCorrectType(obj)) {
+            return !isRequired;
+        } else {
+            return summaryOfCheck.stream()
+                    .allMatch(i -> i.test(obj));
+        }
     }
 }
