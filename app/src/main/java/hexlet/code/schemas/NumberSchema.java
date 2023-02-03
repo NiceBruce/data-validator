@@ -22,7 +22,7 @@ public class NumberSchema extends BaseSchema {
 
     @Override
     public final NumberSchema required() {
-        setIsRequiredEnabled(true);
+        setIsRequired(true);
         return this;
     }
 

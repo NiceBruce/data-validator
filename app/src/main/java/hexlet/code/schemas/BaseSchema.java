@@ -10,8 +10,8 @@ public abstract class BaseSchema {
     private List<Predicate> summaryOfCheck = new LinkedList<>();
     private boolean isRequired = false;
 
-    public final void setIsRequiredEnabled(boolean requiredEnabled) {
-        isRequired = requiredEnabled;
+    public final void setIsRequired(boolean required) {
+        isRequired = required;
     }
 
     public final void addToSummaryOfCheck(Predicate predicate) {

@@ -24,7 +24,7 @@ public class StringSchema extends BaseSchema {
 
     @Override
     public final StringSchema required() {
-        setIsRequiredEnabled(true);
+        setIsRequired(true);
         Predicate<String> isNotEmpty = s -> s.length() > 0;
         addToSummaryOfCheck(isNotEmpty);
         return this;
