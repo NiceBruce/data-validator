@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public abstract class BaseSchema {
 
-    private List<Predicate> summaryOfCheck = new LinkedList<>();
+    private List<Predicate> summaryOfChecks = new LinkedList<>();
     private boolean isRequired = false;
 
     public final void setIsRequired(boolean required) {
@@ -15,7 +15,7 @@ public abstract class BaseSchema {
     }
 
     public final void addToSummaryOfCheck(Predicate predicate) {
-        this.summaryOfCheck.add(predicate);
+        this.summaryOfChecks.add(predicate);
     }
 
     public abstract boolean isCorrectType(Object obj);
@@ -26,7 +26,7 @@ public abstract class BaseSchema {
         if (!isCorrectType(obj)) {
             return !isRequired;
         } else {
-            return summaryOfCheck.stream()
+            return summaryOfChecks.stream()
                     .allMatch(i -> i.test(obj));
         }
     }

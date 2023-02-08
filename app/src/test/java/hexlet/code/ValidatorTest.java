@@ -69,8 +69,8 @@ public class ValidatorTest {
         Validator v = new Validator();
         StringSchema schema = v.string();
 
-        assertThat(schema.isValid(schema.isValid(""))).isEqualTo(true);
-        assertThat(schema.isValid(schema.isValid(null))).isEqualTo(true);
+        assertThat(schema.isValid("")).isEqualTo(true);
+        assertThat(schema.isValid(null)).isEqualTo(true);
 
         schema.required();
 
